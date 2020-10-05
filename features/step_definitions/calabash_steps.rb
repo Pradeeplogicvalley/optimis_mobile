@@ -73,7 +73,7 @@ Given(/^click record an action$/) do
     sleep(3)
   query("android.widget.EditText id:'edit_search'", setText:"9696788")
     sleep(3)
-  touch("android.widget.TextView id:'case_list_defaulter_name'")
+   performAction("click_on_text", 'Case Holdings')
     sleep(3)
   performAction("click_on_text", '9696788')
   sleep(3)
