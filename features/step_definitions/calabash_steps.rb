@@ -103,8 +103,8 @@ When(/^enter the payment details and click next$/) do
   touch("android.widget.EditText id:'cardAmountEditText'")
 sleep(3)
    query("android.widget.EditText id:'cardAmountEditText'", setText:"635.0")
-   sleep(3)
- touch("android.widget.Button id:'btn_footer_next'")
+   sleep(5)
+touch("android.widget.Button id:'btn_footer_pay'")
   sleep(3)
 end
 
