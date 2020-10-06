@@ -105,11 +105,12 @@ sleep(3)
    query("android.widget.EditText id:'cardAmountEditText'", setText:"635.0")
    sleep(5)
 touch("android.widget.Button id:'btn_footer_pay'")
-  sleep(3)
+  sleep(15)
 end
 
 Then(/^enter notes and submit$/) do
   touch("android.widget.EditText id:'log_note'")
+sleep(3)
    query("android.widget.EditText id:'log_note'", setText:"Test Take a Payment, Record non-visit action")
    sleep(2)
  touch("android.widget.Button id:'btn_submit'")
