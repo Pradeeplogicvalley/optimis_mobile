@@ -105,7 +105,7 @@ sleep(3)
 sleep(3)
    query("android.widget.EditText id:'cardAmountEditText'", setText:"635.0")
    sleep(7)
-touch("android.widget.Button id:'btn_footer_pay'")
+touch("android.widget.Button id:'btn_footer_next'")
   sleep(15)
 end
 
