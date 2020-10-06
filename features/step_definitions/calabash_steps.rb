@@ -96,6 +96,7 @@ When(/^choose action type$/) do
 end
 
 When(/^enter the payment details and click next$/) do
+sleep(3)
   touch("android.widget.ImageView id:'paymentRefreshImageView'")
    sleep(3)
  touch("android.widget.CheckBox id:'casePaymentCheckBox'")
@@ -103,7 +104,7 @@ When(/^enter the payment details and click next$/) do
   touch("android.widget.EditText id:'cardAmountEditText'")
 sleep(3)
    query("android.widget.EditText id:'cardAmountEditText'", setText:"635.0")
-   sleep(5)
+   sleep(7)
 touch("android.widget.Button id:'btn_footer_pay'")
   sleep(15)
 end
