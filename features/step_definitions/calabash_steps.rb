@@ -109,6 +109,7 @@ touch("android.widget.Button id:'btn_footer_pay'")
 end
 
 Then(/^enter notes and submit$/) do
+sleep(3)
   touch("android.widget.EditText id:'log_note'")
 sleep(3)
    query("android.widget.EditText id:'log_note'", setText:"Test Take a Payment, Record non-visit action")
@@ -221,7 +222,6 @@ When(/^enter payment details and click next$/) do
   sleep(2)
  touch("android.widget.ImageView id:'paymentRefreshImageView'")
    sleep(6)
- 
  touch("android.widget.CheckBox id:'casePaymentCheckBox'")
    sleep(3) 
  touch("android.widget.EditText id:'receiptNumberEditText'")
