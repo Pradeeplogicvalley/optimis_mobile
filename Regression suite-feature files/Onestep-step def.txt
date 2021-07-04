@@ -1,0 +1,1108 @@
+require 'calabash-android/calabash_steps'
+
+Given(/^click record action$/) do
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(3)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A438981")
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(3)
+  performAction("click_on_text", 'Record a visit action')
+    sleep(3)
+  performAction("click_on_text", 'Yes')
+     sleep(5)  
+   touch("android.widget.Button id:'btn_yes'")
+  sleep(3)
+  touch("android.widget.Button id:'btn_yes'")
+     sleep(3)  
+  performAction("click_on_text", 'Record an action')
+    sleep(3)
+end
+
+When(/^choose door details$/) do
+  sleep(2)
+ touch("android.widget.Spinner id:'id_door_color'")
+  sleep(3)
+  performAction("click_on_text", 'Blue')
+  sleep(3)
+  touch("android.widget.Spinner id:'id_house_type'")
+  sleep(3)
+  performAction("click_on_text", 'Bungalow')
+  sleep(3)
+  touch("android.widget.Button id:'btn_footer_next'")
+  sleep(3)
+ touch("android.widget.Spinner id:'id_contact_person'")
+  sleep(3)
+  performAction("click_on_text", 'Defendant')
+  sleep(3)
+  touch("android.widget.Button id:'btn_footer_next'")
+  sleep(3)
+end
+
+When(/^choose the action type$/) do
+  sleep(3)
+  touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+   performAction("click_on_text", 'Take a payment/Setup a payment plan')
+   sleep(3)
+   touch("android.widget.Spinner id:'id_payment_method_code'")
+   sleep(3)
+   performAction("click_on_text", 'Take a payment now')
+    sleep(2)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(3)
+end
+
+When(/^enter payment details and click next$/) do
+  sleep(2)
+ touch("android.widget.ImageView id:'paymentRefreshImageView'")
+   sleep(6)
+ touch("android.widget.CheckBox id:'casePaymentCheckBox'")
+   sleep(3) 
+ touch("android.widget.EditText id:'receiptNumberEditText'")
+  sleep(2)
+   query("android.widget.EditText id:'receiptNumberEditText'", setText:"214")
+   sleep(3)
+ touch("android.widget.EditText id:'cashAmountEditText'")
+  sleep(2)
+   query("android.widget.EditText id:'cashAmountEditText'", setText:"2.00")
+   sleep(3)
+ touch("android.widget.EditText id:'caseCashAmountEditText'")
+  sleep(2)
+   query("android.widget.EditText id:'caseCashAmountEditText'", setText:"2.00")
+   sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+  sleep(3)
+     query("android.widget.EditText id:'log_note'", setText:"Test take a payment")
+     sleep(3)
+  touch("android.widget.Button id:'btn_submit'")
+    sleep(3)
+   touch("android.widget.Button id:'btn_ok'")
+  sleep(3)
+   touch("android.widget.TextView id:'action_quickview'")
+     sleep(3)
+    performAction("click_on_text", 'Conclude visit')
+    sleep(3)
+   touch("android.widget.Button id:'btn_ok'")
+     sleep(3)
+end
+
+Then(/^enter note and submit for payment$/) do
+  
+  sleep(3) 
+end
+
+Given(/^click record an action$/) do
+    touch("android.widget.EditText id:'editid'")
+  sleep(3)
+    touch("android.widget.EditText id:'editpwd'")
+    query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5)
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A443292")
+    sleep(3)
+  touch("android.widget.LinearLayout id:'case_list_container'") 
+    sleep(2)
+
+end
+
+When(/^choose action type$/) do
+  performAction("click_on_text", 'Record a non visit action')
+    sleep(3)
+  performAction("click_on_text", 'Yes')
+     sleep(3)  
+  performAction("click_on_text", 'Record an action')
+    sleep(3)
+  touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+    performAction("click_on_text", 'Take a payment/Setup a payment plan')
+   sleep(3)
+   touch("android.widget.Spinner id:'id_payment_method_code'")
+   performAction("click_on_text", 'Take a payment now')
+    sleep(2)
+  touch("android.widget.Button id:'btn_footer_next'")
+   sleep(3)
+end
+
+When(/^enter the payment details and click next$/) do
+  touch("android.widget.ImageView id:'paymentRefreshImageView'")
+   sleep(3)
+ touch("android.widget.CheckBox id:'casePaymentCheckBox'")
+   sleep(3)
+  touch("android.widget.EditText id:'cardAmountEditText'")
+sleep(3)
+   query("android.widget.EditText id:'cardAmountEditText'", setText:"3.0")
+   sleep(4)  
+   touch("android.widget.EditText id:'caseCardAmountEditText'")
+   sleep(3)
+   query("android.widget.EditText id:'caseCardAmountEditText'", setText:"3.0")
+    sleep(3)
+touch("android.widget.Button id:'btn_footer_next'")
+  sleep(5)
+end
+
+Then(/^enter notes and submit$/) do
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test Take a Payment, Record non-visit action")
+   sleep(2)
+ touch("android.widget.Button id:'btn_submit'")
+  sleep(3)
+end	
+
+
+Given(/^Record returned action for visit action$/) do
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A470024")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+  performAction("click_on_text", 'Record a visit action')
+  sleep(3)
+    performAction("click_on_text", 'Yes')
+       sleep(5)  
+     touch("android.widget.Button id:'btn_yes'")
+    sleep(3)
+    touch("android.widget.Button id:'btn_yes'")
+       sleep(3)  
+   performAction("click_on_text", 'Record an action')
+     sleep(3)
+end
+
+When(/^choose the door details$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ performAction("click_on_text", 'Blue')
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ performAction("click_on_text", 'Bungalow')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ performAction("click_on_text", 'Defendant')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+end
+
+When(/^choose the action type as returned in visit action$/) do
+  sleep(3)
+  touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(5)
+   performAction("click_on_text", 'Returned')
+   sleep(3)
+   performAction("click_on_text", 'Please select')
+  sleep(2)
+   performAction("click_on_text", '5 - NO CONTACT')
+  sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(3)
+   performAction("click_on_text", 'Please select ID shown')
+  sleep(3)
+   performAction("click_on_text", 'Driving License')
+  sleep(3)
+ 
+   touch("android.widget.Button id:'btn_footer_next'")
+  sleep(3)
+ query("android.widget.EditText id:'log_note'", setText:"Test returned")
+  sleep(3)
+   touch("android.widget.Button id:'btn_submit'")
+     sleep(3)
+    touch("android.widget.Button id:'btn_ok'")
+   sleep(3)
+end
+
+Then(/^enter notes and submit it$/) do
+sleep(3)
+touch("android.widget.TextView id:'action_quickview'")
+ sleep(3)
+performAction("click_on_text", 'Conclude visit')
+sleep(3)
+touch("android.widget.Button id:'btn_ok'")
+ sleep(30)
+end
+
+Given(/^Record returned action for non visit action$/) do
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+    query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A470024")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(2)
+  performAction("click_on_text", 'Record a non visit action')
+  sleep(3)
+    performAction("click_on_text", 'Yes')
+       sleep(2)    
+   performAction("click_on_text", 'Record an action')
+     sleep(2)
+end
+
+When(/^choose the action type as returned in non visit action$/) do
+  touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(1)
+   performAction("click_on_text", 'Returned')
+   sleep(1)
+   performAction("click_on_text", 'Please select')
+  sleep(2)
+   performAction("click_on_text", '5 - NO CONTACT')
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(1)
+   performAction("click_on_text", 'Please select ID shown')
+  sleep(1)
+   performAction("click_on_text", 'Driving License')
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+  sleep(3)
+ end 
+Then(/^enter notes and submit it in non visit$/) do
+ query("android.widget.EditText id:'log_note'", setText:"Test returned 3")
+  sleep(1)
+   touch("android.widget.Button id:'btn_submit'")
+     sleep(1)
+    touch("android.widget.Button id:'btn_ok'")
+end
+  
+  
+ 
+Given(/^visit action left letter$/) do
+   touch("android.widget.EditText id:'editid'")
+   touch("android.widget.EditText id:'editpwd'")
+   query("android.widget.EditText id:'editpwd'", setText:"1111")
+ sleep(2)
+ touch("Button id:'btnnext'")
+   sleep(3)
+  touch("Button id:'btnlogin'")
+   sleep(6)  
+   performAction("click_on_text", 'Skip')
+	sleep(3)
+ touch("android.widget.TextView id:'doors_count'")
+   sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A929794")
+   sleep(2)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(2)
+    performAction("click_on_text", 'Record a visit action')
+  sleep(4)
+    performAction("click_on_text", 'Yes')
+       sleep(5)  
+     touch("android.widget.Button id:'btn_yes'")
+    sleep(3)
+    touch("android.widget.Button id:'btn_yes'")
+       sleep(3)  
+     performAction("click_on_text", 'Record an action')
+       sleep(3)
+end
+
+When(/^enter the details of house and left letter$/) do
+  touch("android.widget.Spinner id:'id_door_color'")
+   sleep(3)
+   performAction("click_on_text", 'Blue')
+   sleep(3)
+   touch("android.widget.Spinner id:'id_house_type'")
+   sleep(3)
+   performAction("click_on_text", 'Bungalow')
+   sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(3)
+  touch("android.widget.Spinner id:'id_contact_person'")
+   sleep(3)
+   performAction("click_on_text", 'Defendant')
+   sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(3)
+  sleep(3)
+  touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+   performAction("click_on_text", 'Left Letter')
+   sleep(3)
+  touch("android.widget.Button id:'btn_footer_next'")
+     sleep(3)
+  query("android.widget.EditText id:'log_note'", setText:"Test Left letter")
+  sleep(3)
+   touch("android.widget.Button id:'btn_submit'")
+     sleep(3)
+    touch("android.widget.Button id:'btn_ok'")
+   sleep(3)
+end
+
+Then(/^close the case$/) do
+  touch("android.widget.TextView id:'action_quickview'")
+    sleep(3)
+   performAction("click_on_text", 'Conclude visit')
+  sleep(5)
+  touch("android.widget.Button id:'btn_ok'")
+    sleep(4)
+end  
+
+
+Given(/^Enter officer id for RIE$/) do
+  touch("android.widget.EditText id:'editid'")
+  query("android.widget.EditText id:'editid'", setText:"23777")
+  sleep(3)
+end
+When(/^Enter Password for RIE$/) do
+ sleep(3)
+  touch("android.widget.EditText id:'editpwd'")
+   sleep(3)
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button for RIE$/) do
+   sleep(3)
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button for RIE$/) do  
+ performAction("click_on_text", 'Skip')
+  sleep(6)
+end
+And(/^I want to click case holdings for RIE$/) do 
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case for RIE$/) do
+  sleep(2) 
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+And(/^click record visit action button for RIE$/) do
+ touch("android.widget.LinearLayout id:'view_visit_action'")
+ performAction("click_on_text", 'Yes')
+ performAction("click_on_text", 'Yes')
+ performAction("click_on_text", 'Continue')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(4)
+end
+Then(/^perform Recorded in Error action$/) do
+ touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ performAction("click_on_text", 'Black')
+ sleep(2)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(2)
+ performAction("click_on_text",'Bungalow')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(2)
+ performAction("click_on_text",'Defendant')
+ sleep(2)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(2)
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Recorded in error')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(7)
+ touch("android.widget.EditText id:'log_note'")
+  sleep(5)
+ query("android.widget.EditText id:'log_note'", setText:"Test RIE")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+ sleep(5)
+ touch("android.widget.TextView id:'action_quickview'")
+ sleep(4)
+ touch("android.widget.Button id:'endVisitButton'")
+ sleep(4)
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+end  
+  
+ 
+
+Given(/^Enter officer id3$/) do
+  touch("android.widget.EditText id:'editid'")
+  sleep(3)
+end
+When(/^Enter Password3$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button3$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button3$/) do  
+  performAction("click_on_text", 'Skip')
+  sleep(6)
+end
+
+
+When(/^I want to click case holdings3$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+Then(/^click the case3$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+And(/^click record non visit action button3$/) do
+ touch("android.widget.LinearLayout id:'view_non_visit_action'")
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ end
+ Then(/^perform Unassign case action$/) do
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Unassign Case')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.EditText id:'log_note'")
+ query("android.widget.EditText id:'log_note'", setText:"Test UC")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+end 
+
+
+Given(/^Enter officer id4$/) do
+  touch("android.widget.EditText id:'editid'")
+  sleep(3)
+end
+When(/^Enter Password4$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button4$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button4$/) do  
+  performAction("click_on_text", 'Skip')
+  sleep(6)
+end
+
+And(/^I want to click case holdings4$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case4$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+And(/^click record non visit action button4$/) do
+ touch("android.widget.LinearLayout id:'view_non_visit_action'")
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ end
+ Then(/^perform Find address location action$/) do
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Find Address Location')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.EditText id:'log_note'")
+ query("android.widget.EditText id:'log_note'", setText:"Test FAL")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+end 
+
+Given(/^Enter officer id5$/) do
+  touch("android.widget.EditText id:'editid'")
+  sleep(3)
+end
+When(/^Enter Password5$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button5$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button5$/) do  
+  touch("Button id:'btn_skip'")
+  sleep(6)
+end
+
+And(/^I want to click case holdings5$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case5$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+And(/^click record non visit action button5$/) do
+ touch("android.widget.LinearLayout id:'view_non_visit_action'")
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ end
+Then(/^perform Inbound Calls action$/) do
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Inbound Calls')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.RadioButton id:'radioBtnThirdParty'")
+ touch("android.widget.EditText id:'editTextThirdPartyName'")
+ query("android.widget.EditText id:'editTextThirdPartyName'", setText:"Test 3rd Party")
+ sleep(3)
+ touch("android.widget.EditText id:'editTextPhNumber'")
+ query("android.widget.EditText id:'editTextPhNumber'", setText:"09876543210")
+ sleep(3)
+ touch("android.widget.TextView id:'dateText'")
+ performAction("click_on_text", 'OK')
+ sleep(3)
+ touch("android.widget.TextView id:'timeText'")
+ performAction("click_on_text", 'OK')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(2)
+ touch("android.widget.EditText id:'log_note'")
+ query("android.widget.EditText id:'log_note'", setText:"Test IB calls")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+end
+
+Given(/^Enter officer id6$/) do
+  touch("android.widget.EditText id:'editid'")
+  sleep(3)
+end
+When(/^Enter Password6$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button6$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button6$/) do  
+  touch("Button id:'btn_skip'")
+  sleep(6)
+end
+
+And(/^I want to click case holdings6$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case6$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end  
+And(/^click record non visit action button6$/) do
+ touch("android.widget.LinearLayout id:'view_non_visit_action'")
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ end
+ Then(/^perform Outbound Calls action$/) do
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Outbound Calls')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.EditText id:'editTextPhNumber'")
+ query("android.widget.EditText id:'editTextPhNumber'", setText:"09876543210")
+ sleep(3)
+ touch("android.widget.TextView id:'dateText'")
+ performAction("click_on_text", 'OK')
+ sleep(3)
+ touch("android.widget.TextView id:'timeText'")
+ performAction("click_on_text", 'OK')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(2)
+ touch("android.widget.EditText id:'log_note'")
+ query("android.widget.EditText id:'log_note'", setText:"Test OB calls")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+end 
+  
+
+
+Given(/^Enter officer id for revisit action$/) do
+  sleep(1)
+  touch("android.widget.EditText id:'editid'")
+  query("android.widget.EditText id:'editid'", setText:"23777")
+  sleep(3)
+end
+When(/^Enter Password for revisit action$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button for revisit action$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+touch("android.widget.EditText id:'editvehiclenumer'")
+  query("android.widget.EditText id:'editvehiclenumer'", setText:"UK 2")
+  sleep(3)
+touch("android.widget.EditText id:'editmileage'")
+  query("android.widget.EditText id:'editmileage'", setText:"21")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button for revisit action$/) do  
+  performAction("click_on_text", 'Skip')
+  sleep(5)
+
+end
+And(/^I want to click case holdings for revisit action$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case for revisit action$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+Then(/^click record visit action button for revisit action$/) do
+ touch("android.widget.LinearLayout id:'view_visit_action'")
+ sleep(3)
+ performAction("click_on_text", 'Yes')
+ sleep(5)
+ performAction("click_on_text", 'Yes')
+  sleep(3)
+ performAction("click_on_text", 'Continue')
+ sleep(3)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ performAction("click_on_text", 'Black')
+ sleep(2)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(2)
+ performAction("click_on_text",'Bungalow')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(2)
+ performAction("click_on_text",'Defendant')
+ sleep(2)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(2)
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Customer claims either self-isolation or awaiting COVID-19 test results')
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.EditText id:'log_note'")
+ query("android.widget.EditText id:'log_note'", setText:"Test Revisit")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(3)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+ sleep(5)
+ touch("android.widget.TextView id:'action_quickview'")
+ sleep(3)
+ touch("android.widget.Button id:'endVisitButton'")
+ sleep(3)
+ performAction("click_on_text", 'Yes')
+ sleep(5)
+end 
+
+
+
+Given(/^Enter officer id2$/) do
+  touch("android.widget.EditText id:'editid'")
+  sleep(3)
+end
+When(/^Enter Password2$/) do
+ sleep(1)
+  touch("android.widget.EditText id:'editpwd'")
+  query("android.widget.EditText id:'editpwd'", setText:"1111")
+  sleep(3)
+end
+And(/^click login button2$/) do
+  touch("Button id:'btnnext'")
+  sleep(3)
+  touch("Button id:'btnlogin'")
+  sleep(5)
+end  
+And(/^I Click Skip button2$/) do  
+  performAction("click_on_text", 'Skip')
+  sleep(6)
+end
+
+And(/^I want to click case holdings2$/) do  
+  touch("android.widget.LinearLayout id:'tab1Layout'")
+  sleep(2)
+end  
+And(/^click the case2$/) do  
+  touch("android.widget.LinearLayout id:'case_list_container'")
+  sleep(4)
+end
+
+And(/^click record non visit action button2$/) do
+ touch("android.widget.LinearLayout id:'view_non_visit_action'")
+ performAction("click_on_text", 'Yes')
+ sleep(2)
+ touch("android.widget.LinearLayout id:'view_rec_action'")
+ sleep(3)
+ end
+ 
+ Then(/^perform Link case request action$/) do
+ touch("android.widget.Spinner id:'id_spinner_action'")
+ sleep(3)
+ performAction("click_on_text", 'Link Request')
+ sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+   sleep(4)
+ touch("android.widget.EditText id:'linkCasesEditText'")
+ sleep(4)
+  query("android.widget.EditText id:'linkCasesEditText'", setText:"A486702")
+    sleep(5)
+	touch("android.widget.TextView id:'caseNumberTextView'")
+	sleep(5)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(6)
+ touch("android.widget.EditText id:'log_note'")
+  sleep(3)
+ query("android.widget.EditText id:'log_note'", setText:"Test LCR")
+ sleep(5)
+ touch("android.widget.LinearLayout")
+ sleep(5)
+ performAction("click_on_text", 'Submit')
+ sleep(3)
+ performAction("click_on_text", 'Ok')
+end
+
+
+Given(/^Go to online search for arrangments$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(6)  
+end
+
+  When(/^click active arrangments filter$/) do
+	performAction("click_on_text", 'Skip')
+	sleep(4)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(4)
+	 performAction("click_on_text", 'Ok') 
+      sleep(4)  
+  end
+  
+  Then(/^View the cases for All arrangments search$/) do
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(3)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end
+
+
+Given(/^Go to online search for On Hold$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'On-Hold')
+end
+
+  When(/^click On Hold filter$/) do
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3)  
+  end
+  
+  Then(/^View the cases for On Hold search$/) do
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(3)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end
+
+Given(/^Go to online search for Unvisited$/) do 
+ sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'Unvisited')
+end
+
+  When(/^click Unvisited filter$/) do
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3)  
+  end
+  
+  Then(/^View the cases for Unvisited search$/) do
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(3)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end
+
+Given(/^Go to online search for Visited$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'Visited')
+end
+
+  When(/^click Visited filter$/) do
+  
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3)
+  performAction("click_on_text", '3 or More')
+    sleep(1)
+  performAction("click_on_text", 'Ok')	
+  end
+  
+  Then(/^View the cases for Visited search$/) do    
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(3)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end 
+  
+  Given(/^Go to online search for Case no$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'Case Number')
+end
+
+  When(/^click Case no filter$/) do
+  sleep(3)
+  touch("android.widget.EditText id:'edit_search'")
+  sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"A437235")
+  sleep(4)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(8)
+  end
+  
+  Then(/^View the cases for Case no search$/) do    
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(4)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end 
+ 
+ 
+  Given(/^Go to online search for KPI$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'KPI')
+end
+
+  When(/^click KPI filter$/) do
+    sleep(2)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(8)
+  end
+  
+  Then(/^View the result for KPI search$/) do    
+    sleep(2)
+   touch("android.widget.Button id:'btn_ok'")
+      sleep(2)
+  end  
+ 
+
+Given(/^Go to online search for Telephone number$/) do 
+  sleep(3)
+       touch("android.widget.EditText id:'editid'")
+     sleep(3)
+       touch("android.widget.EditText id:'editpwd'")
+      sleep(2)
+       query("android.widget.EditText id:'editpwd'", setText:"1111")
+     sleep(2)
+     touch("Button id:'btnnext'")
+       sleep(3)
+      touch("Button id:'btnlogin'")
+       sleep(5) 
+	performAction("click_on_text", 'Skip')
+	sleep(3)
+     performAction("click_on_text", 'Arrangements')
+	 sleep(3)
+	 performAction("click_on_text", 'Telephone')
+end
+
+  When(/^click Telephone number filter$/) do
+  sleep(3)
+  touch("android.widget.EditText id:'edit_search'")
+  sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"00013227236")
+  sleep(4)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(8)
+  end
+  
+  Then(/^View the result for Telephone number search$/) do    
+    sleep(4)
+     touch("android.widget.LinearLayout id:'case_list_container'")  
+      sleep(4)
+      touch("android.widget.Button id:'caseHoldingsBtn'")
+      sleep(2)
+  end  
+  
+  

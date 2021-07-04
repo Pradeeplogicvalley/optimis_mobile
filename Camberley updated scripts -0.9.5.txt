@@ -1,0 +1,1780 @@
+Scenario Outline: Register for camberley login
+Given I want to register with <officerId> and <password> for camberley
+When I click register for camberley    
+And I want to login with <username> and <userpassword> for camberley login
+And Enter <vehicleregistration> no for camberley
+And Enter <mileage> for camberley
+Then I click login button for camberley
+
+Examples:
+|officerId|password|username|userpassword|vehicleregistration|mileage|
+|73044|1111|73044|1111|ABC123|250|
+
+
+
+#Register officer with password
+
+Given(/^I want to register with (\d+) and (\d+) for camberley$/) do |officerId, password|
+ # @data = table.hashes
+  # value = data[0]
+  
+  sleep(3)
+      touch("Button id:'btnregister'")
+      sleep(2)
+	  
+#********Register with empty fields**********************	  
+	  touch("android.widget.Button id:'btn_ok'")
+#	  sleep(2)
+#	  valuereg1="Invalid OfficerID."
+#  puts("Expected result : Invalid OfficerID.")
+#  valuereg=query("android.widget.TextView id:'textview_status'", :text)
+#  puts("Actual:")
+#  puts(valuereg)
+#  sleep(2)
+#p=assert_text(valueseized1, should_equal = true)
+# sleep(2)
+ #  puts(p)
+ #   sleep(2)
+#******************************	
+      touch("android.widget.EditText id:'edit_officer_id'")
+      sleep(2)
+      query("android.widget.EditText id:'edit_officer_id'", setText:"#{officerId}")
+  sleep(3)
+ #book = Spreadsheet::Workbook.new
+ #sheet1 = book.create_worksheet
+ #sheet1.row(0).push "#{officerId}"
+ #book.write 'D:\camberley_Regression\Write.xls'
+  sleep(1)
+      touch("android.widget.EditText id:'edit_password'")
+      sleep(2)
+      query("android.widget.EditText id:'edit_password'", setText:"#{password}")
+     sleep(1)
+ #sheet1.row(0).push "#{password}"
+  #book.write 'D:\camberley_Regression\Write.xls'
+     hide_soft_keyboard()
+     sleep(3)
+end
+     
+When(/^I click register for camberley$/) do
+  sleep(3)
+     touch("Button id:'btnregister'")
+         sleep(6)
+     touch("android.widget.Button id:'btn_ok'")
+       sleep(20)
+	     
+  value1="User successfully registered"
+  puts("Expected: User successfully registered")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+     touch("android.widget.Button id:'btn_ok'")
+         sleep(6)
+end
+
+#Login with officer id and password
+
+When(/^I want to login with (\d+) and (\d+) for camberley login$/) do |username, userpassword|
+sleep(1)
+   touch("android.widget.EditText id:'editid'")
+   query("android.widget.EditText id:'editid'", setText:"#{username}")
+   sleep(3)
+    touch("android.widget.EditText id:'editpwd'")
+    query("android.widget.EditText id:'editpwd'", setText:"#{userpassword}")
+    sleep(3) 
+  hide_soft_keyboard()
+     sleep(5) 
+end
+
+And(/^Enter (.*) no for camberley$/) do | vehicleregistration |
+  sleep(2)
+      touch("Button id:'btnnext'")
+       sleep(3)
+     touch("android.widget.EditText id:'editvehiclenumer'")
+    sleep(2)
+       query("android.widget.EditText id:'editvehiclenumer'", setText:"#{vehicleregistration}")
+       sleep(3) 
+  
+end
+
+And(/^Enter (\d+) for camberley$/) do | mileage | 
+  sleep(3)
+   touch("android.widget.EditText id:'editmileage'")
+  sleep(2)
+     query("android.widget.EditText id:'editmileage'", setText:"#{mileage}")
+     sleep(3)
+     hide_soft_keyboard()
+     sleep(30)
+     touch("Button id:'btnlogin'")
+  sleep(2)
+end
+Then(/^I click login button for camberley$/) do
+ sleep(2)
+  touch("android.widget.Button id:'btn_ok'")
+      sleep(50)
+       value1="My cases"
+       puts("Expected: My cases")
+  value=query("android.widget.Button id:'tab1'", :text).first
+   sleep(2)
+   puts("Actual: ")
+   sleep(1)
+   puts(value)
+   sleep(2)
+  p=assert_text(value, should_equal = true)
+   sleep(2)
+     puts(p)
+   puts("Logged in successfully and reached home screen")
+   sleep(3) 
+a1=query("android.widget.TextView id:'case_count'", :text).first
+puts(a1) 
+sleep(2)
+b1=query("android.widget.TextView id:'doors_count'", :text).first
+puts(b1)
+sleep(2)
+puts("Above are the total case count and door count") 
+end
+**************************************************Other positive*********************************************
+Scenario Outline: Other positive action
+    Given click record an action with <credentials> and <opcaseno> for camberley
+	When choose action type 
+	Then enter notes and submit
+	
+Examples:
+|credentials|opcaseno|
+|1111| A988584 |	
+
+
+
+#Other positive action
+
+	Given(/^click record an action with (\d+) and (.*) for camberley$/) do |credentials, opcaseno|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{credentials}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{opcaseno}")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 #performAction("click_on_text", 'Record an action')
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(3)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(3)
+   value=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value)
+	 sleep(2)
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'")
+ 
+end
+
+When(/^choose action type$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ #performAction("click_on_text", 'Blue')
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ #performAction("click_on_text", 'Bungalow')
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ #performAction("click_on_text", 'Customer')
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+   #performAction("click_on_text", 'Other Positive')
+   touch("* {text CONTAINS 'Other Positive'}") 
+    touch("android.widget.Button id:'btn_footer_next'")
+ 
+end
+Then(/^enter notes and submit$/) do
+sleep(3)
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test OP")
+   hide_soft_keyboard()
+   sleep(2)
+  # performAction("click_on_text", 'Yes')
+   touch("* {text CONTAINS 'Yes'}") 
+  sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="Other Positive)"
+     puts("Expected: Other Positive")
+     test1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(test1)
+     sleep(2)
+	#result=query("android.widget.LinearLayout id:'layout_row'", :text)
+  #sleep(2)
+ # puts(result)
+end
+
+
+#*********************************Camberley - Returned actions***************************************************8
+
+Scenario Outline: Returned action -7
+    Given click record action with <password> and <rtncode7caseno> for camberley
+	When choose action type & return code 7 
+	Then enter the notes and submit for return code 7
+	
+ Examples:
+|password|rtncode7caseno|
+|1111| B016325 |
+
+Scenario Outline: Returned action -102
+    Given click record an action button <password> and <rtncode102caseno> for camberley
+	When choose action type & return code 102
+	Then entering notes to submit the returned action
+	
+ Examples:
+|password|rtncode102caseno|
+|1111| B020912 |
+
+Scenario Outline: Returned action -103
+    Given Perform an returned action with <password> and <rtncode103caseno> for camberley
+	When choose action type & return code 103
+	Then enter notes and submit for camberley return code 103
+
+ Examples:
+|password|rtncode103caseno|
+|1111| B081196 |
+
+Scenario Outline: Returned action -104
+    Given Returned action performed with <password> and <rtncode104caseno> for camberley
+	When choose action type & return code 104
+	Then enter the notes & submit for returncode 104
+	
+ Examples:
+|password|rtncode104caseno|
+|1111| B081203 |
+
+#**********************Return code 7******************************
+
+Given(/^click record action with (\d+) and (.*) for camberley$/) do |password, rtncode7caseno|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{rtncode7caseno}")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 #performAction("click_on_text", 'Record an action')
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(2)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(2)
+	 valuereturn7=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuereturn7)
+	 sleep(2)	 
+   # performAction("click_on_text", 'Ok')
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'") 
+end
+
+When(/^choose action type & return code 7$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ #performAction("click_on_text", 'Blue')
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ #performAction("click_on_text", 'Bungalow')
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ #performAction("click_on_text", 'Customer')
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+  # performAction("click_on_text", 'Returned')
+   touch("* {text CONTAINS 'Returned'}")
+   sleep(2)
+	  # performAction("click_on_text", 'Please select')
+	   touch("* {text CONTAINS 'Please select'}")
+  sleep(2)
+   #performAction("click_on_text", '7 - Unable to locate address')
+   touch("* {text CONTAINS '7 - Unable to locate address'}")
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(1)
+  # performAction("click_on_text", 'Please select ID shown')
+   touch("* {text CONTAINS 'Please select ID shown'}")
+  sleep(1)
+  # performAction("click_on_text", 'Driving License')
+  touch("* {text CONTAINS 'Driving License'}")
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+ 
+end
+Then(/^enter the notes and submit for return code 7$/) do
+sleep(3)
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test Rtn 7")
+   hide_soft_keyboard()
+   sleep(2)
+  # performAction("click_on_text", 'Yes')
+   touch("* {text CONTAINS 'Yes'}")
+  sleep(2)
+  valuereturnn7=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuereturnn7)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  valuesync1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(valuesync1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     testvalue="(Returned)"
+     puts("Expected: Returned")
+     testvalue1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(testvalue1)
+     sleep(2)
+end
+
+#**********************Return code 102******************************
+
+Given(/^click record an action button (\d+) and (.*) for camberley$/) do |password, rtncode102caseno|
+ sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{rtncode102caseno}")
+  hide_soft_keyboard()
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 #performAction("click_on_text", 'Record an action')
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(2)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(2)
+	 valuereturn102=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuereturn102)
+	 sleep(2)
+   # performAction("click_on_text", 'Ok')
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'") 
+ 
+end
+
+When(/^choose action type & return code 102$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ #performAction("click_on_text", 'Blue')
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ #performAction("click_on_text", 'Bungalow')
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ #performAction("click_on_text", 'Customer')
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+  # performAction("click_on_text", 'Returned')
+   touch("* {text CONTAINS 'Returned'}")
+   sleep(2)
+	  # performAction("click_on_text", 'Please select')
+	   touch("* {text CONTAINS 'Please select'}")
+  sleep(2) 
+   touch("* {text CONTAINS '102 - Owner refused to hand back car'}")
+  sleep(2)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(2)
+   touch("* {text CONTAINS 'Please select ID shown'}")
+  sleep(2)
+  touch("* {text CONTAINS 'Driving License'}")
+  sleep(5)
+   touch("android.widget.Button id:'btn_footer_next'")
+ sleep(5)
+end
+
+Then(/^entering notes to submit the returned action$/) do
+sleep(5)
+  touch("android.widget.EditText id:'log_note'")
+sleep(5)
+   query("android.widget.EditText id:'log_note'", setText:"Test Rtn 102")
+   hide_soft_keyboard()
+   sleep(4)
+ touch("* {text CONTAINS 'Yes'}")
+  sleep(3)
+  valuereturnn102=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuereturnn102)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  valuereturn102sync=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(valuereturn102sync)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     testreturn102="(Returned)"
+     puts("Expected: Returned")
+     testreturntext1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(testreturntext1)
+     sleep(2)
+end
+
+#**********************Return code 103******************************
+
+Given(/^Perform an returned action with (\d+) and (.*) for camberley$/) do |password, rtncode103caseno|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{rtncode103caseno}")
+  hide_soft_keyboard()
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 #performAction("click_on_text", 'Record an action')
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(2)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(2)
+	 value=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value)
+	 sleep(2)
+   # performAction("click_on_text", 'Ok')
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'") 
+ 
+end
+
+When(/^choose action type & return code 103$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ #performAction("click_on_text", 'Blue')
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ #performAction("click_on_text", 'Bungalow')
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ #performAction("click_on_text", 'Customer')
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+  # performAction("click_on_text", 'Returned')
+   touch("* {text CONTAINS 'Returned'}")
+   sleep(2)
+   touch("* {text CONTAINS 'Please select'}")
+  sleep(2)
+   touch("* {text CONTAINS '103 - Gone away'}")
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(1)
+    touch("* {text CONTAINS 'Please select ID shown'}")
+  sleep(3)
+  touch("* {text CONTAINS 'Driving License'}")
+  sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+end
+Then(/^enter notes and submit for camberley return code 103$/) do
+sleep(3)
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test Rtn 103")
+   hide_soft_keyboard()
+   sleep(4)
+ touch("* {text CONTAINS 'Yes'}")
+  sleep(2)
+  value1=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value1)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="(Returned)"
+     puts("Expected: Returned")
+     test1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(test1)
+     sleep(2)
+end
+
+#********************Return code 104**********************************************
+
+Given(/^Returned action performed with (\d+) and (.*) for camberley$/) do |password, rtncode104caseno|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{rtncode104caseno}")
+  hide_soft_keyboard()
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 #performAction("click_on_text", 'Record an action')
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(2)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(2)
+	 value=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value)
+	 sleep(2)
+   # performAction("click_on_text", 'Ok')
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'")
+ 
+end
+
+When(/^choose action type & return code 104$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ #performAction("click_on_text", 'Blue')
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ #performAction("click_on_text", 'Bungalow')
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+   touch("* {text CONTAINS 'Returned'}")
+   sleep(2)
+   touch("* {text CONTAINS 'Please select'}")
+  sleep(2)
+  # performAction("click_on_text", '104 - Unable to locate car')
+   touch("* {text CONTAINS '104 - Unable to locate car'}")
+  sleep(1)
+   touch("android.widget.Button id:'btn_footer_next'")
+   sleep(1)
+    touch("* {text CONTAINS 'Please select ID shown'}")
+  sleep(1)
+  touch("* {text CONTAINS 'Driving License'}")
+  sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+end
+Then(/^enter the notes & submit for returncode 104$/) do
+sleep(3)
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test Rtn 104")
+  hide_soft_keyboard()
+   sleep(4)
+ touch("* {text CONTAINS 'Yes'}")
+  sleep(2)
+  value1=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value1)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="(Returned)"
+     puts("Expected: Returned")
+     test1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(test1)
+     sleep(2)
+end
+
+**********************************Revisit*********************************************88
+
+Scenario Outline: Revisit action
+    Given perform revisit action with <password> and <revisitcaseno> for camberley
+	When choose revisit action in camberley
+	Then enter the notes and submit for revisit action in camberley
+
+Examples:
+|password|revisitcaseno|
+|1111| B118047 |	
+
+#***********Revisit action****************
+
+Given(/^perform revisit action with (\d+) and (.*) for camberley$/) do |password, revisitcaseno|
+    sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{revisitcaseno}")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 touch("* {text CONTAINS 'Record an action'}") 
+	 sleep(3)
+	 touch("android.widget.Button id:'btn_arrival'")
+	 sleep(2)
+	value=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(value)
+	 sleep(2)
+	touch("* {text CONTAINS 'Ok'}") 
+       sleep(2)	   
+     touch("android.widget.Button id:'btn_yes'")
+end
+
+When(/^choose revisit action in camberley$/) do
+  sleep(2)
+touch("android.widget.Spinner id:'id_door_color'")
+ sleep(3)
+ touch("* {text CONTAINS 'Blue'}") 
+ sleep(3)
+ touch("android.widget.Spinner id:'id_house_type'")
+ sleep(3)
+ touch("* {text CONTAINS 'Bungalow'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+touch("android.widget.Spinner id:'id_contact_person'")
+ sleep(3)
+ touch("* {text CONTAINS 'Customer'}") 
+ sleep(3)
+ touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+ touch("android.widget.Spinner id:'id_spinner_action'")
+   sleep(3)
+    touch("* {text CONTAINS 'Revisit'}") 
+   sleep(3)
+   touch("android.widget.Button id:'btn_footer_next'")
+ sleep(3)
+end
+Then(/^enter the notes and submit for revisit action in camberley$/) do
+sleep(3)
+  touch("android.widget.EditText id:'log_note'")
+sleep(3)
+   query("android.widget.EditText id:'log_note'", setText:"Test revisit")
+   hide_soft_keyboard()
+   sleep(2)
+   touch("* {text CONTAINS 'Yes'}") 
+  sleep(2)
+    valuerevisit=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuerevisit)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="(Revisit)"
+     puts("Expected: Revisit")
+     test1=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(test1)
+     sleep(2)
+   #  p=assert_text(test1, should_equal = true)
+   #sleep(2)
+ #    puts(p)
+    touch(nil, :offset => {:x => 295, :y => 289})  
+     sleep(3) 
+end	
+
+#**************************Record note action******************************************
+
+Scenario Outline: Record note action
+    Given click record a note button with <password> and <notecaseno> for camberley
+	Then submit the notes by clicking record note button
+	
+Examples:
+|password|notecaseno|
+|1111| B084622 |
+
+Given(/^click record a note button with (\d+) and (.*) for camberley$/) do |password, notecaseno|
+    sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+  touch("android.widget.TextView id:'doors_count'")
+    sleep(3)
+  query("android.widget.EditText id:'edit_search'", setText:"#{notecaseno}")
+      sleep(3)
+  sleep(3)
+   touch("android.widget.LinearLayout id:'case_list_container'")
+     sleep(3)
+	 touch("* {text CONTAINS 'Record a Note'}") 
+	 sleep(3)
+end
+Then(/^submit the notes by clicking record note button$/) do
+  touch("android.widget.EditText id:'record_note_note'")
+sleep(3)
+   query("android.widget.EditText id:'record_note_note'", setText:"Test notes")
+   hide_soft_keyboard()
+   sleep(2)
+  touch("android.widget.Button id:'rca_record_note'") 
+  sleep(2)
+  valuerevisit=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuerevisit)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("* {text CONTAINS 'Ok'}")
+   sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="(Notes)"
+     puts("Expected: Notes")
+     testnotes=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(testnotes)
+     sleep(2)
+   #  p=assert_text(test1, should_equal = true)
+   #sleep(2)
+ #    puts(p)
+    touch(nil, :offset => {:x => 295, :y => 289})  
+     sleep(3) 
+end	
+
+#***********************Third party delivery**************************************
+
+Scenario Outline: Third party delivery action
+    Given click seized vehicles in right side panel with <password> for camberley
+	Then click third party delivery option for camberley
+	
+Examples:
+|password|
+|1111|
+
+Given(/^click seized vehicles in right side panel with (\d+) for camberley$/) do |password|
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+	sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(3)
+  touch("android.widget.TextView id:'action_quickview'")
+    sleep(5) 
+end
+
+Then(/^click third party delivery option for camberley$/) do 
+sleep(5)
+ touch(nil, :offset => {:x => 79, :y => -673})
+ sleep(5)
+scroll_to("android.widget.ScrollView'", container: "* id:'navigation_drawer_right'")
+#scroll_down
+     sleep(5) 
+touch("* {text CONTAINS 'Seized Vehicles'}")
+sleep(2)
+touch("android.widget.Spinner id:'action_spinner'")
+ sleep(2)
+touch("* {text CONTAINS 'Third Party Delivery'}")
+ sleep(2)
+touch("android.widget.Button id:'btn_submit'")
+sleep(2)
+touch("* {text CONTAINS 'Next'}")
+sleep(2)
+touch("android.widget.EditText id:'edit_third_party_name'")
+sleep(2)
+query("android.widget.EditText id:'edit_third_party_name'", setText:" Test 3rd party")
+hide_soft_keyboard()
+sleep(3)
+touch("* {text CONTAINS 'Next'}")
+sleep(2)
+touch("android.widget.EditText id:'log_note'")
+sleep(2)
+query("android.widget.EditText id:'log_note'", setText:" Test 3rd party")
+hide_soft_keyboard()
+sleep(2)
+touch("* {text CONTAINS 'Submit'}")
+sleep(2)
+touch("* {text CONTAINS 'Ok'}")
+sleep(3)
+valuerevisit=query("android.widget.TextView id:'textview_status'", :text)
+	 puts(valuerevisit)
+	 sleep(2)
+   query("android.widget.TextView id:'textview_status'", :text)
+  sleep(2)
+  touch("* {text CONTAINS 'Ok'}")
+   sleep(2)
+  touch("android.widget.TextView id:'action_notifications'")
+  sleep(2)
+  value1=query("android.widget.TextView id:'action_notifications'", :text)
+  puts("Expected: Verified actions performed is synced
+    Actual: ")
+    puts(value1)
+  sleep(2)
+  puts("Verified actions performed is synced")
+  sleep(2)
+  touch(query("android.widget.TextView id:'action_quickview'"))
+      sleep(2)
+  touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     sleep(2)
+     test="(Notes)"
+     puts("Expected: Notes")
+     testnotes=query("android.widget.TextView id:'txt_case_action'", :text)
+     puts("Actual:")
+     puts(testnotes)
+     sleep(2)
+   #  p=assert_text(test1, should_equal = true)
+   #sleep(2)
+ #    puts(p)
+    touch(nil, :offset => {:x => 295, :y => 289})  
+     sleep(3) 
+end
+
+#***************************Left panel******************************************
+
+Scenario Outline: Left Menus for camberley
+
+	Given go to home screen with <password> for camberley
+	When check the inbox notifications from columbus for camberley
+	When check the Map view for camberley
+	When check the nearby cases for camberley
+	When check E-paying report for camberley
+	When check DVLA Enquiry for camberley
+	When check OVC for camberley
+	When check About details for camberley
+	When view the case details for camberley
+	When view the warrant PDF of case for camberley
+	When view the attachments of case for camberley
+	When view the assigned to of case for camberley
+	When view the contact info of case for camberley
+	When view the check Contact Info details, Contact address, DOB, NI no, Contact no, Employer details for camberley
+	When view the Offence details of case for camberley
+	When view the case note of case for camberley
+	When view the VRM of case for camberley
+	When view the Nearby case of case for camberley
+	Then log out the application for camberley
+	
+ Examples:
+|password|
+|1111|
+
+#Left Menus for camberley
+
+Given(/^go to home screen with (\d+) for camberley$/) do |password|
+   sleep(3)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+end
+
+When(/^check the inbox notifications from columbus for camberley$/) do
+ sleep(2)
+   touch(nil, :offset => {:x => 60, :y => 245})
+  sleep(3)
+  
+end
+
+When(/^check the Map view for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 85, :y => 319})
+  sleep(10)
+end
+
+When(/^check the nearby cases for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 94, :y => 385})
+  sleep(10)
+end
+
+When(/^check E\-paying report for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 86, :y => 450})
+  sleep(3)
+  value1="This feature is not available"
+  puts("Expected:This feature is not available")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)
+touch("* {text CONTAINS 'Ok'}")   
+   sleep(3)
+end
+
+When(/^check DVLA Enquiry for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 112, :y => 534})
+  sleep(3)
+  value1="This feature is currently disabled. Please contact your REM."
+  puts("Expected:This feature is currently disabled. Please contact your REM.")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+  touch(nil, :offset => {:x => 634, :y => 463})
+  sleep(2)
+end
+
+When(/^check OVC for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 82, :y => 617})
+  sleep(3)
+    sleep(3)
+    value1="This feature is currently disabled. Please contact your REM."
+  puts("Expected:This feature is currently disabled. Please contact your REM.")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+   touch(nil, :offset => {:x => 636, :y => 460})
+
+end
+
+When(/^check About details for camberley$/) do
+ sleep(2)
+   touch(nil, :offset => {:x => 81, :y => 746})
+   sleep(2)
+   touch(nil, :offset => {:x => 1020, :y => 681})
+  sleep(2)
+#touch(query("android.widget.TextView id:'recentActivityTx'")) 
+     #sleep(2)
+     #testvalue1=query("android.widget.FrameLayout id:'content'", :text)
+     #puts(testvalue1)
+  # touch(nil, :offset => {:x => 1005, :y => 680})
+  #sleep(3) 
+end
+
+When(/^view the case details for camberley$/) do
+ sleep(4)
+   touch(nil, :offset => {:x => 82, :y => 164})
+    sleep(2)
+         casevalue=query("android.widget.TextView id:'case_holding_text'", :text)
+     puts(casevalue)
+	 sleep(1)
+	  casevalue=query("android.widget.TextView id:'case_refresh_time'", :text)
+     puts(casevalue)
+	  sleep(1)
+	   casevalue=query("android.widget.TextView id:'case_count'", :text)
+     puts(casevalue)
+	  sleep(1)
+	    casevalue=query("android.widget.TextView id:'doors_count'", :text)
+     puts(casevalue)
+	  sleep(3)
+   touch(nil, :offset => {:x => 476, :y => 546})
+    sleep(2)
+   touch(nil, :offset => {:x => 90, :y => 501})
+  sleep(3)
+end
+
+When(/^view the warrant PDF of case for camberley$/) do
+ sleep(2)
+   touch(nil, :offset => {:x => 1037, :y => 579})
+  sleep(3)
+   touch(nil, :offset => {:x => 1191, :y => 127})
+  sleep(3)
+end
+
+When(/^view the attachments of case for camberley$/) do
+  sleep(3)
+end
+
+When(/^view the assigned to of case for camberley$/) do
+   sleep(2)
+   touch(nil, :offset => {:x => 255, :y => 168})
+  sleep(2)
+    testvalue1=query("android.widget.TextView id:'txt_officer_detail'", :text)
+     puts(testvalue1)
+	 sleep(2)
+	  testvalue1=query("android.widget.TextView id:'txt_assinged_on'", :text)
+     puts(testvalue1)
+	 sleep(2)
+end
+
+When(/^view the contact info of case for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 371, :y => 164})
+     sleep(2)
+   #testvalue1=query("android.widget.ScrollView id:'contactInfoScrollView'", :text)
+    # puts(testvalue1)
+  sleep(3)
+end
+
+When(/^view the check Contact Info details, Contact address, DOB, NI no, Contact no, Employer details for camberley$/) do
+   sleep(2)
+   touch(nil, :offset => {:x => 380, :y => 163})
+   testvalue1=query("android.widget.TextView id:'warrantAddressText'", :text)
+     puts(testvalue1)
+	  sleep(1)
+	  testvalue1=query("android.widget.TextView id:'txt_warrant_address'", :text)
+     puts(testvalue1)
+	   sleep(1)
+	  testvalue1=query("android.widget.TextView id:'textView'", :text)
+     puts(testvalue1)
+	 sleep(1)
+	  testvalue1=query("android.widget.TextView id:'txt_dob'", :text)
+     puts(testvalue1)
+	 sleep(1)
+	  testvalue1=query("android.widget.TextView id:'textView19'", :text)
+     puts(testvalue1)
+	 sleep(1)
+	  testvalue1=query("android.widget.TextView id:'textView32'", :text)
+     puts(testvalue1)
+	  sleep(1)
+	  testvalue1=query("android.widget.TextView id:'txt_contact_number'", :text)
+     puts(testvalue1)
+  sleep(2)
+end
+
+When(/^view the Offence details of case for camberley$/) do
+   sleep(1)
+   touch(nil, :offset => {:x => 494, :y => 160})
+   sleep(2)
+   testvalue1=query("android.widget.TextView id:'cas_offence_row_case_number'", :text)
+     puts(testvalue1)
+	  sleep(1)
+	  testvalue1=query("android.widget.TextView id:'cas_offence_row_date'", :text)
+     puts(testvalue1)
+	   sleep(1)
+	  testvalue1=query("android.widget.TextView id:'cas_offence_row_note'", :text)
+     puts(testvalue1)
+  sleep(3)
+end
+
+When(/^view the case note of case for camberley$/) do
+   sleep(2)
+   touch(nil, :offset => {:x => 629, :y => 174})
+   sleep(2)
+   testvalue1=query("android.widget.TextView id:'case_note_row_note'", :text)
+     puts(testvalue1)
+  sleep(3)
+end
+
+When(/^view the VRM of case for camberley$/) do
+  sleep(3)
+     touch(nil, :offset => {:x => 738, :y => 154})
+   sleep(2)
+#  touch("android.widget.TextView id:'case_list_title'")
+ #  sleep(2)
+   testvalue1=query("android.widget.TextView id:'case_vrm_num'", :text)
+     puts(testvalue1)
+	 sleep(2)
+	  testvalue1=query("android.widget.TextView id:'case_vrm_status'", :text)
+     puts(testvalue1)
+	 sleep(2)
+	  testvalue1=query("android.widget.TextView id:'case_vrm_res_date'", :text)
+     puts(testvalue1)
+	 sleep(2)
+ #puts("No VRM tab found")
+end
+
+When(/^view the Nearby case of case for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 819, :y => 163})
+  sleep(15)
+   sleep(2)
+   touch(nil, :offset => {:x => 54, :y => 78})
+  sleep(3)
+   sleep(2)
+   touch(nil, :offset => {:x => 60, :y => 95})
+  sleep(3)
+end
+
+Then(/^log out the application for camberley$/) do
+  sleep(3)
+   touch(nil, :offset => {:x => 74, :y => 247})
+  sleep(3)
+ scroll_down
+ sleep(3)
+  touch(nil, :offset => {:x => 92, :y => 776})
+   sleep(2)
+   testvalue1=query("android.widget.TextView id:'textview_status'", :text)
+     puts(testvalue1)
+  sleep(2)
+  testvalue1=query("android.widget.TextView id:'btn_ok'", :text)
+     puts(testvalue1)
+	 sleep(2)
+   touch(nil, :offset => {:x => 505, :y => 483})
+  sleep(1)
+end
+
+#*****************************Online search************************
+
+ Scenario Outline: Online search by Postcode
+
+ 	Given Go to online search with <password> for Postcode
+	When click Go for Postcode
+	Then View the alert for Postcode
+
+Examples:
+|password|
+|1111|	
+	
+Scenario Outline: Online search by Case no
+
+	Given Go to online search with <password> for Case no
+	When click Case no filter
+	Then View the cases for Caseno search
+	
+Examples:
+|password|
+|1111|	
+	
+Scenario Outline: Online search by VRM
+
+	Given Go to online search with <password> for VRM
+	When click VRM filter
+	Then View the cases for VRM search
+	
+Examples:
+|password|
+|1111|	
+
+Scenario Outline: Online search by Unvisited
+
+	Given Go to online search with <password> for Unvisited
+	When click Unvisited filter
+	Then View the cases for Unvisited search
+
+Examples:
+|password|
+|1111|	
+
+Scenario Outline: Online search by Visited
+
+	Given Go to online search with <password> for Visited
+	When click Visited filter
+	Then View the cases for Visited search
+
+Examples:
+|password|
+|1111|	
+	
+Scenario Outline: Online search by KPI
+
+	Given Go to online search with <password> for KPI
+	When click KPI filter
+	Then View the result for KPI search
+
+Examples:
+|password|
+|1111|	
+	
+Scenario Outline: Online search by Telephone number 
+
+	Given Go to online search with <password> for Telephone number
+	When click Telephone number filter
+	Then View the result for Telephonenumber search
+
+Examples:
+|password|
+|1111|	
+
+#******************Online search****************************************
+
+Given(/^Go to online search with (\d+) for Postcode$/) do |password|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5)  
+end
+
+  When(/^click Go for Postcode$/) do
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3) 
+  end
+  
+  Then(/^View the alert for Postcode$/) do
+    sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end
+
+ Given(/^Go to online search with (\d+) for Case no$/) do |password|
+   sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5) 
+	  touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+	  touch("* {text CONTAINS 'CaseNo'}") 
+end
+
+  When(/^click Case no filter$/) do
+  sleep(3)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(2)
+  end
+  
+  Then(/^View the cases for Caseno search$/) do    
+   sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end 
+  
+  
+Given(/^Go to online search with (\d+) for VRM$/) do |password|
+sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5)  
+     touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+	 touch("* {text CONTAINS 'VRM'}") 
+end
+
+  When(/^click VRM filter$/) do
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3)  
+  end
+  
+  Then(/^View the cases for VRM search$/) do
+    sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end
+
+Given(/^Go to online search with (\d+) for Unvisited$/) do |password|
+ sleep(1)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")  
+	sleep(3)
+     touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+   touch("* {text CONTAINS 'Unvisited'}") 
+end
+
+  When(/^click Unvisited filter$/) do
+  touch("android.widget.Button id:'btn_go'")
+    sleep(3)  
+  end
+  
+  Then(/^View the cases for Unvisited search$/) do
+   sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end
+
+Given(/^Go to online search with (\d+) for Visited$/) do |password|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5)  
+   touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+  touch("* {text CONTAINS 'Visited'}") 
+end
+
+  When(/^click Visited filter$/) do
+  sleep(2)
+  touch("android.widget.Button id:'btn_go'") 
+  end
+  
+  Then(/^View the cases for Visited search$/) do    
+    sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end 
+ 
+  Given(/^Go to online search with (\d+) for KPI$/) do |password|
+  sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(5)  
+   touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+	 touch("* {text CONTAINS 'KPI'}") 
+end
+
+  When(/^click KPI filter$/) do
+    sleep(2)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(8)
+  end
+  
+  Then(/^View the result for KPI search$/) do    
+    sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end  
+ 
+
+Given(/^Go to online search with (\d+) for Telephone number$/) do |password|
+sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(4)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(2)  
+   touch("* {text CONTAINS 'Postcode'}") 
+	 sleep(3)
+ touch("* {text CONTAINS 'Telephone'}") 
+ sleep(1)
+end
+
+  When(/^click Telephone number filter$/) do
+  sleep(2)
+  touch("android.widget.Button id:'btn_go'")
+    sleep(2)
+  end
+  
+  Then(/^View the result for Telephonenumber search$/) do    
+   sleep(1)
+     value1="Online search is currently unavailable"
+  puts("Expected: Online search is currently unavailable")
+  value=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(value)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)  
+   sleep(2)
+    touch("* {text CONTAINS 'Ok'}") 
+  end
+
+#**************************Right side panel**************
+Scenario Outline: Right Menus for camberley
+
+Given go to home screen for right menus with <password> in camberley
+When Click on eye icon for camberley
+When click on Officer id and date for camberley
+When click refresh case holdings for camberley
+When click Sync for camberley
+When view the recent activity details for camberley
+When click cashup for camberley
+When click Seized vehicles for camberley
+Then close right menu for camberley          
+
+ Examples:
+|password|
+|1111|
+
+
+Given(/^go to home screen for right menus with (\d+) in camberley$/) do |password|
+ sleep(1)
+    touch("android.widget.EditText id:'editid'")
+  sleep(2)
+    touch("android.widget.EditText id:'editpwd'")
+  sleep(2)
+    query("android.widget.EditText id:'editpwd'", setText:"#{password}")
+	hide_soft_keyboard()
+  sleep(2)
+  touch("Button id:'btnnext'")
+    sleep(3)
+   touch("Button id:'btnlogin'")
+    sleep(7)
+end
+
+When(/^Click on eye icon for camberley$/) do
+   sleep(1)
+    touch(query("android.widget.TextView id:'action_quickview'"))
+    sleep(3)
+end
+
+When(/^click on Officer id and date for camberley$/) do
+ sleep(5)
+   touch(query("android.widget.TextView id:'txt_officer_id'"))
+      sleep(1)
+ value=query("android.widget.TextView id:'txt_officer_id'", :text).first
+  sleep(3)
+  puts(value)
+  sleep(2)
+  value1="73044"
+  puts("Expected officer id is : 73044")
+  valueofficerid=query("android.widget.TextView id:'txt_officer_id'", :text)
+  puts("Actual:")
+  puts(valueofficerid)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)
+  touch(nil, :offset => {:x => 961, :y => 222})  
+    sleep(1)
+end
+
+When(/^click refresh case holdings for camberley$/) do
+  sleep(1)
+  #touch(nil, :offset => {:x => 964, :y => 409})
+  touch("android.widget.LinearLayout id:'refresh_case_holding'")
+   sleep(20) 
+   value1="Case holdings have been updated."
+  puts("Expected result : Case holdings have been updated.")
+  valuecase=query("android.widget.TextView id:'textview_status'", :text)
+  puts("Actual:")
+  puts(valuecase)
+  sleep(2)
+p=assert_text(value1, should_equal = true)
+ sleep(2)
+   puts(p)
+   sleep(2)
+  touch("* {text CONTAINS 'Ok'}") 
+  sleep(3) 
+end
+
+When(/^click Sync for camberley$/) do
+  sleep(1)
+ # touch(nil, :offset => {:x => 1077, :y => 512}) 
+  touch("android.widget.LinearLayout id:'sync_to_server'")
+    sleep(1)
+valuesync1="No actions to be sent"
+  puts("Expected result : No actions to be sent")
+  valuesync=query("android.widget.TextView id:'txtPendingActionsCount'", :text)
+  puts("Actual:")
+  puts(valuesync)
+  sleep(2)
+p=assert_text(valuesync1, should_equal = true)
+ sleep(2)
+   puts(p)
+   sleep(2)   
+end
+
+When(/^view the recent activity details for camberley$/) do
+  sleep(2)
+   touch(nil, :offset => {:x => 1078, :y => 518})  
+    sleep(2) 
+   touch(nil, :offset => {:x => 58, :y => 80})  
+    sleep(3)
+	touch(query("android.widget.TextView id:'action_quickview'"))
+    sleep(3)
+end
+
+When(/^click cashup for camberley$/) do
+  sleep(1)
+ # touch(nil, :offset => {:x => 1077, :y => 512}) 
+  touch("android.widget.RelativeLayout id:'cashupLane'")
+    sleep(1)
+valuecashup1="No cash payment found"
+  puts("Expected result : No cash payment found")
+  valuecashup=query("android.widget.TextView id:'cashup_emptyView'", :text)
+  puts("Actual:")
+  puts(valuecashup)
+  sleep(2)
+p=assert_text(valuecashup1, should_equal = true)
+ sleep(2)
+   puts(p)
+   sleep(2)   
+end
+
+When(/^click Seized vehicles for camberley$/) do
+  sleep(1)
+ # touch(nil, :offset => {:x => 1077, :y => 512}) 
+  touch("android.widget.RelativeLayout id:'hpiLane'")
+    sleep(1)
+valueseized1="No seized actions found"
+  puts("Expected result : No seized actions found")
+  valueseized=query("android.widget.RelativeLayout id:'hpiLane'", :text)
+  puts("Actual:")
+  puts(valueseized1)
+  sleep(2)
+p=assert_text(valueseized1, should_equal = true)
+ sleep(2)
+   puts(p)
+   sleep(2)   
+end
+
+Then(/^close right menu for camberley$/) do
+sleep(3)
+end  
